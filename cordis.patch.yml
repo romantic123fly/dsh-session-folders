@@ -1,0 +1,22 @@
+# dsh-session-folders — one folder per conversation inside the workspace.
+#
+# `folderName` supports these tokens:
+#   {title}   the conversation title (`{title}` renders empty until it is known)
+#   {date}    local calendar day, e.g. 20261110
+#   {time}    local wall clock, e.g. 102345
+#   {id}      short Session id (8 characters after the `session-` prefix)
+#   {session} full Session id
+#
+# `isolateSessions` lists Session ids that should be moved into a folder even
+# though they already hold a conversation (used to retrofit one conversation).
+# Set `debug: true` to append one diagnostic line per decision to
+# `~/.dsh/session-folders.log`.
+- insert:
+    - id: session-folders
+      name: 'dsh-session-folders'
+      config:
+        enabled: true
+        folderName: '{title}'
+        includeDerivedSessions: false
+        isolateSessions: []
+        debug: false

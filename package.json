@@ -1,0 +1,57 @@
+{
+  "name": "dsh-session-folders",
+  "version": "1.0.0",
+  "type": "module",
+  "description": "Give every new conversation its own folder inside its workspace directory (DeepSeek Harness plugin).",
+  "keywords": [
+    "dsh",
+    "dsh-bundle",
+    "dsh-plugin",
+    "deepseek-harness",
+    "workspace",
+    "session",
+    "folder"
+  ],
+  "author": "romantic123fly",
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/romantic123fly/dsh-session-folders.git"
+  },
+  "homepage": "https://github.com/romantic123fly/dsh-session-folders#readme",
+  "bugs": {
+    "url": "https://github.com/romantic123fly/dsh-session-folders/issues"
+  },
+  "exports": {
+    ".": "./index.js",
+    "./client": "./client.js",
+    "./locale/*.json": "./locale/*.json",
+    "./icon": "./icon.svg"
+  },
+  "files": [
+    "index.js",
+    "client.js",
+    "cordis.patch.yml",
+    "locale/*.json",
+    "icon.svg",
+    "README.md"
+  ],
+  "scripts": {
+    "test": "node tests/run3.mjs && node tests/run4.mjs && node tests/run5.mjs && node tests/run6.mjs"
+  },
+  "dsh": {
+    "bundle": {
+      "patch": "./cordis.patch.yml"
+    },
+    "client": {
+      "platform": "web",
+      "inject": [
+        "@deepseek-ai/dsh-client-ui-slots"
+      ]
+    }
+  },
+  "icon": "./icon.svg",
+  "engines": {
+    "node": ">=20"
+  }
+}

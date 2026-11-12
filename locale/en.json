@@ -1,0 +1,6 @@
+{
+  "meta": {
+    "title": "Session Folders",
+    "description": "Give every new conversation its own folder inside the workspace path (conversation title + date) and work in that folder, so files never mix between conversations; when a conversation is deleted you choose whether its folder and files go with it."
+  }
+}
