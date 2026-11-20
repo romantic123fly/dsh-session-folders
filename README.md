@@ -86,6 +86,18 @@
 
 删除接口是宿主上的两个本机同源 HTTP 路由（`/api/dsh-session-folders/inspect`、`/api/dsh-session-folders/delete`），要求请求头 `x-session-folders: 1`、回环地址与同源 Origin；浏览器半侧在 `client.js` 里，只负责菜单项和弹窗。
 
+## 子工作区
+
+除了新建会话，你还可以在已有工作区下面**新建子工作区**（一个子文件夹，同时注册成独立工作区），子工作区下面还能继续新建会话和更深的子工作区，层级不限。
+
+- 插件用**层级工作区浏览器**替换了内置的扁平工作区列表：每个工作区行右侧有 **「对话」**（新建对话）和 **「子区」**（新建子工作区）两个按钮。
+- 点「子区」弹窗：父工作区默认就是当前这一行（下拉框里仍可改选其它工作区，列表按路径排序、显示 `标题 — 路径`），输入子工作区名称后点「创建子工作区」。
+- 宿主会在父工作区目录下新建一个同名子文件夹（非法字符同样替换为空格、重名追加 `-2`/`-3`），再把它注册成一个新工作区。
+- 新子工作区按**文件夹路径自动嵌套**：谁的目录在谁里面，谁就显示在谁的下面、缩进一层；在它下面新建会话时，本插件照常给每个会话建专属文件夹，与父工作区互不干扰。
+- 如果注册失败，刚建的文件夹会被回滚删除，不会留下孤儿目录。
+
+宿主接口是另外两个本机同源路由（`/api/dsh-session-folders/workspaces` 列表、`/api/dsh-session-folders/create-sub-workspace` 创建），安全约束与删除接口一致（`x-session-folders: 1` 头 + 回环 + 同源）。
+
 ## 排查
 
 插件把每个决定写进 `~/.dsh/session-folders.log`（需要 `debug: true`）：
@@ -130,9 +142,10 @@ node tests/run3.mjs   # 创建 → 命名 → 跟随标题改名
 node tests/run4.mjs   # 旧会话判定、isolateSessions 补建
 node tests/run5.mjs   # 删除接口（inspect / delete 路由）
 node tests/run6.mjs   # agent/pre-step 兜底
+node tests/run7.mjs   # 子工作区接口（列表 / 创建路由）
 ```
 
-四套仿真都不需要真正启动 DSH：用假的 `ctx`、临时工作区和临时 `HOME` 跑真实文件系统，全部输出 `ALL CHECKS PASSED` 即通过。
+五套仿真都不需要真正启动 DSH：用假的 `ctx`、临时工作区和临时 `HOME` 跑真实文件系统，全部输出 `ALL CHECKS PASSED` 即通过。
 
 ## 许可
 

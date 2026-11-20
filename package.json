@@ -37,7 +37,7 @@
     "README.md"
   ],
   "scripts": {
-    "test": "node tests/run3.mjs && node tests/run4.mjs && node tests/run5.mjs && node tests/run6.mjs"
+    "test": "node tests/run3.mjs && node tests/run4.mjs && node tests/run5.mjs && node tests/run6.mjs && node tests/run7.mjs && node tests/run8.mjs"
   },
   "dsh": {
     "bundle": {
@@ -46,7 +46,15 @@
     "client": {
       "platform": "web",
       "inject": [
-        "@deepseek-ai/dsh-client-ui-slots"
+        "@deepseek-ai/dsh-client-ui-slots",
+        "@deepseek-ai/dsh-api-session-controller",
+        "@deepseek-ai/dsh-api-workspace-controller",
+        "@deepseek-ai/dsh-client-ui-layout",
+        "@deepseek-ai/dsh-client-ui-context-menu",
+        "@deepseek-ai/dsh-client-ui-renderer",
+        "@deepseek-ai/dsh-client-ui-session",
+        "@deepseek-ai/dsh-client-ui-workspace",
+        "@deepseek-ai/dsh-client-ui-sidebar"
       ]
     }
   },
